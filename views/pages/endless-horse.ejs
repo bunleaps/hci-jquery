@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head'); %>
+  </head>
+  <body class="container">
+    <!-- <header><%- include('../partials/header'); %></header> -->
+
+    <main>Endless horse</main>
+    <div id="horse" class="centered" style="padding-top: 222px">
+      <pre>
+       ,
+    _,,)\.~,,._
+    (()`  ``)\))),,_
+     |     \ ''((\)))),,_          ____
+     |6`   |   ''((\())) "-.____.-"    `-.-,
+     |    .'\    ''))))'                  \)))
+     |   |   `.     ''                     ((((
+     \, _)     \/                          |))))
+      `'        |                          (((((
+                \                  |       ))))))
+                 `|    |           ,\     /((((((
+                  |   / `-.______.&lt;  \   |  )))))
+                  |   |  /         `. \  \  ((((
+                  |  / \ |           `.\  | (((
+                  \  | | |             )| |  ))
+                   | | | |             || |  '</pre
+      >
+      <pre>                   | | | |             || |</pre>
+    </div>
+
+    <style>
+      pre {
+        margin: 0;
+      }
+
+      .centered {
+        width: 380px;
+        margin: 0 auto 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+      }
+    </style>
+
+    <script>
+      $(document).ready(function () {
+        var container = $("#horse");
+
+        function generateLeg() {
+          var windowHeight = $(window).height();
+          var containerHeight = container.height();
+          var legLine =
+            "<pre>                   | | | |             || |</pre>";
+
+          // Calculate the number of leg lines needed to fill the page
+          var numLegLines = Math.ceil((windowHeight - containerHeight) / 22); // Assuming each line is around 22px in height
+
+          // Generate and append the leg lines
+          for (var i = 0; i < numLegLines; i++) {
+            container.append(legLine);
+          }
+        }
+
+        function appendLine() {
+          var newLine =
+            "<pre>                   | | | |             || |</pre>";
+          container.append(newLine);
+        }
+
+        // Generate the leg lines to fill the page on page load
+        generateLeg();
+
+        // Append a new line when the container is scrolled to the bottom
+        $(window).scroll(function () {
+          if (
+            $(window).scrollTop() + $(window).height() >=
+            $(document).height() - 100
+          ) {
+            appendLine();
+          }
+        });
+      });
+    </script>
+
+    <!-- <footer><%- include('../partials/footer'); %></footer> -->
+  </body>
+</html>
