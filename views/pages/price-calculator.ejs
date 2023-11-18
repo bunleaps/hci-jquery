@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head', {title: "Price Calculator"}); %>
+  </head>
+  <body>
+    <h1>Price Calculator</h1>
+
+    <div class="pos">
+      <div class="menu">
+        <div>
+          <label>Select Burger Type:</label>
+          <br />
+          <div class="burgers">
+            <div class="burger">
+              <img
+                class="img-burger"
+                src="https://static.onecms.io/wp-content/uploads/sites/19/2013/04/15/basic-burger-ay-x.jpg"
+                alt="Basic Burger"
+              />
+              <div class="option-burger">
+                <input
+                  type="checkbox"
+                  id="basic"
+                  class="burgerCheckbox"
+                  value="5.00"
+                  name="group1[]"
+                />
+                <label for="basic">Basic Burger - $5.00</label>
+              </div>
+            </div>
+            <br />
+            <div class="burger">
+              <img
+                class="img-burger"
+                src="https://static.onecms.io/wp-content/uploads/sites/19/2013/04/15/basic-burger-ay-x.jpg"
+                alt="Basic Burger"
+              />
+              <div class="option-burger">
+                <input
+                  type="checkbox"
+                  id="cheese"
+                  class="burgerCheckbox"
+                  value="6.50"
+                  name="group1[]"
+                />
+                <label for="cheese">Cheeseburger - $6.50</label>
+              </div>
+            </div>
+            <br />
+
+            <div class="burger">
+              <img
+                class="img-burger"
+                src="https://static.onecms.io/wp-content/uploads/sites/19/2013/04/15/basic-burger-ay-x.jpg"
+                alt="Basic Burger"
+              />
+              <div class="option-burger">
+                <input
+                  type="checkbox"
+                  id="bacon"
+                  class="burgerCheckbox"
+                  value="7.00"
+                  name="group1[]"
+                />
+                <label for="bacon">Bacon Burger - $7.00</label>
+              </div>
+            </div>
+            <br />
+          </div>
+        </div>
+
+        <label>Add Extras:</label>
+        <br />
+        <input
+          type="checkbox"
+          id="extraCheese"
+          class="extraCheckbox"
+          value="1.50"
+        />
+        <label for="extraCheese">Extra Cheese - $1.50</label>
+        <br />
+        <input
+          type="checkbox"
+          id="extraBacon"
+          class="extraCheckbox"
+          value="2.00"
+        />
+        <label for="extraBacon">Bacon - $2.00</label>
+        <br />
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" value="1" min="1" />
+      </div>
+      <div class="receipt">
+        <div id="receipt">
+          <h2>Order</h2>
+          <ul id="selectedOptions">
+            <!-- Selected options will be displayed here dynamically -->
+          </ul>
+        </div>
+        <h2>Total Price: $<span id="totalPrice">0.00</span></h2>
+      </div>
+    </div>
+
+    <style>
+      h1 {
+        padding: 20px;
+        margin: 0;
+        text-align: center;
+      }
+
+      .pos {
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        gap: 10px;
+      }
+
+      .menu {
+        width: 70%;
+        padding: 20px;
+        border: 1px solid black;
+      }
+
+      .receipt {
+        width: 30%;
+        padding: 20px;
+        border: 1px solid black;
+      }
+
+      .burgers {
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+      }
+
+      .burger {
+        width: 200px;
+        border: 1px solid black;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .option-burger {
+        padding: 10px;
+      }
+    </style>
+
+    <script>
+      $(document).ready(function () {
+        $('input[type="checkbox"]').on("change", function () {
+          $('input[name="' + this.name + '"]')
+            .not(this)
+            .prop("checked", false);
+        });
+
+        // Function to calculate and update the total price and receipt
+        function updateTotalPrice() {
+          var basePrice = 0;
+          var extrasPrice = 0;
+          var selectedBurger;
+          var selectedExtras = [];
+
+          // Calculate price for selected burger type(s)
+          $(".burgerCheckbox:checked").each(function () {
+            basePrice += parseFloat($(this).val());
+            var burgerType = $(this).next("label").text().split(" - ")[0];
+            selectedBurger = burgerType + " - $" + basePrice.toFixed(2);
+          });
+
+          // Calculate price for selected extras and build the receipt
+          $(".extraCheckbox:checked").each(function () {
+            var extraPrice = parseFloat($(this).val());
+            extrasPrice += extraPrice;
+
+            var extraName = $(this).next("label").text().split(" - ")[0];
+            selectedExtras.push(extraName + " - $" + extraPrice.toFixed(2));
+          });
+
+          var quantity = parseInt($("#quantity").val()); // Get quantity
+          var totalPrice = (basePrice + extrasPrice) * quantity; // Calculate total price
+
+          // Update the total price on the page
+          $("#totalPrice").text(totalPrice.toFixed(2));
+
+          // Update the receipt
+          var receiptList = $("#selectedOptions");
+          receiptList.empty(); // Clear previous options
+
+          // Add selected burger type(s) to the receipt
+          if (selectedBurger) {
+            receiptList.append("<li>Burger Type: " + selectedBurger + "</li>");
+          }
+
+          // Add selected extras to the receipt
+          if (selectedExtras.length > 0) {
+            receiptList.append(
+              "<li>Extras: " + selectedExtras.join(", ") + "</li>"
+            );
+          }
+        }
+
+        // Attach change event handlers to update the total price and receipt
+        $(".burgerCheckbox, .extraCheckbox, #quantity").change(
+          updateTotalPrice
+        );
+
+        // Initial call to set the default total price and receipt
+        updateTotalPrice();
+      });
+    </script>
+  </body>
+</html>

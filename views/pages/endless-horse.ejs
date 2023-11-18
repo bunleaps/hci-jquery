@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <%- include('../partials/head'); %>
+    <%- include('../partials/head', {title: "Endless Horse"}); %>
   </head>
-  <body class="container">
-    <!-- <header><%- include('../partials/header'); %></header> -->
-
+  <body>
     <div id="horse" class="centered" style="padding-top: 222px">
       <h1>Endless Horse</h1>
       <pre>
@@ -83,7 +81,5 @@
         });
       });
     </script>
-
-    <!-- <footer><%- include('../partials/footer'); %></footer> -->
   </body>
 </html>

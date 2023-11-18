@@ -1,15 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <%- include('../partials/head'); %>
+    <%- include('../partials/head', {title: "Index Page"}); %>
   </head>
-  <body class="container">
-    <!-- <header><%- include('../partials/header'); %></header> -->
+  <body>
+    <h1>Index Page</h1>
+    <div class="card-collection">
+      <% projects.forEach(item => { %>
+      <a href="<%= item.link %>">
+        <div class="card">
+          <div class="card-body">
+            <h3><%= item.name %></h3>
+            <p><%= item.description %></p>
+          </div>
+        </div>
+      </a>
+      <% }); %>
+    </div>
+    <style>
+      h1 {
+        text-align: center;
+      }
+      div.card-collection {
+        padding: 0 20px;
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      div.card {
+        width: 250px;
+        height: 250px;
+        padding: 20px;
+        border: 1px solid black;
 
-    <main>Index Page</main>
-
-    <style></style>
-
-    <!-- <footer><%- include('../partials/footer'); %></footer> -->
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      div.card:hover {
+        background: #e2e2e2;
+      }
+    </style>
   </body>
 </html>

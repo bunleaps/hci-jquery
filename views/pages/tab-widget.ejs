@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head', {title: "Tab Widget"}); %>
+  </head>
+  <body>
+    <h1>Tab Widget</h1>
+
+    <div class="tabs">
+      <div class="tab" data-tab="tab1">Tab 1</div>
+      <div class="tab" data-tab="tab2">Tab 2</div>
+      <div class="tab" data-tab="tab3">Tab 3</div>
+      <div class="tab" data-tab="tab4">Tab 4</div>
+    </div>
+
+    <section id="tab1" class="content">
+      Section 1
+      <div>
+        <p>
+          Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam.
+          Integer ut neque. Vivamus nisi metus, molestie vel, gravida in,
+          condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi.
+          Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu
+          ante scelerisque vulputate.
+        </p>
+      </div>
+    </section>
+
+    <section id="tab2" class="content">
+      Section 2
+      <div>
+        <p>
+          Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+          purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis
+          porttitor velit, faucibus interdum tellus libero ac justo. Vivamus non
+          quam. In suscipit faucibus urna.
+        </p>
+      </div>
+    </section>
+
+    <section id="tab3" class="content">
+      Section 3
+      <div>
+        <p>
+          Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque
+          lobortis. Phasellus pellentesque purus in massa. Aenean in pede.
+          Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed
+          commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis
+          leo purus venenatis dui.
+        </p>
+        <ul>
+          <li>List item one</li>
+          <li>List item two</li>
+          <li>List item three</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="tab4" class="content">
+      Section 4
+      <div>
+        <p>
+          Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+          et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+          faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+          mauris vel est.
+        </p>
+        <p>
+          Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat
+          lectus. Class aptent taciti sociosqu ad litora torquent per conubia
+          nostra, per inceptos himenaeos.
+        </p>
+      </div>
+    </section>
+
+    <style>
+      h1 {
+        padding: 20px;
+        margin: 0;
+        text-align: center;
+      }
+
+      body {
+        padding: 20px;
+      }
+
+      .tabs {
+        display: flex;
+      }
+
+      .tab {
+        background-color: aqua;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+
+      .active {
+        border: 1px solid black;
+      }
+
+      section {
+        margin-top: 5px;
+        padding: 20px;
+        border: 1px solid black;
+      }
+    </style>
+
+    <script>
+      $(document).ready(function () {
+        // Handle tab clicks
+        $(".tab").click(function () {
+          // Remove the "active" class from all tabs
+          $(".tab").removeClass("active");
+
+          // Add the "active" class to the clicked tab
+          $(this).addClass("active");
+
+          // Hide all content divs
+          $(".content").hide();
+
+          // Get the data-tab attribute value
+          var tabId = $(this).data("tab");
+
+          // Show the corresponding content div
+          $("#" + tabId).show();
+        });
+
+        // Show the initial tab content (tab1)
+        $(".tab[data-tab='tab1']").click();
+      });
+    </script>
+  </body>
+</html>
