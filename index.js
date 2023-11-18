@@ -59,6 +59,20 @@ const projects = [
       "Build a widget with tabs for different types of content—like news, reviews, and comments. Users can click tabs to switch between them",
     link: "/tab-widget",
   },
+  {
+    id: 6,
+    name: "Image Gallery with Filters",
+    description:
+      "Build an image gallery where users can filter images by categories like “Nature,” “Travel,” or “Animals” using simple buttons",
+    link: "/image-filter",
+  },
+  {
+    id: 7,
+    name: "Interactive Contact Form",
+    description:
+      "Create a contact form that provides real-time feedback to users as they fill it out. Show error messages instantly if something’s not right",
+    link: "/form",
+  },
 ];
 
 app.get("/", function (req, res) {
@@ -83,6 +97,14 @@ app.get("/drag-n-drop", function (req, res) {
 
 app.get("/tab-widget", function (req, res) {
   res.render("pages/tab-widget");
+});
+
+app.get("/image-filter", function (req, res) {
+  res.render("pages/image-filter");
+});
+
+app.get("/form", function (req, res) {
+  res.render("pages/form");
 });
 
 app.listen(8080, () => {

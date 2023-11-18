@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head', {title: "Image Gallery & Filter"}); %>
+  </head>
+  <body>
+    <h1>Image Gallery & Filter</h1>
+
+    <div class="tabs">
+      <div class="tab" data-tab="tab1">All</div>
+      <div class="tab" data-tab="tab2">Notes</div>
+      <div class="tab" data-tab="tab3">Codes</div>
+    </div>
+
+    <section id="tab1" class="content">
+      <img src="/images/gallery/study/01.png" alt="01" class="tab2" />
+      <img src="/images/gallery/study/02.png" alt="02" class="tab2" />
+      <img src="/images/gallery/study/03.png" alt="03" class="tab2" />
+      <img src="/images/gallery/study/04.png" alt="04" class="tab2" />
+      <img src="/images/gallery/code/01.png" alt="05" class="tab3" />
+      <img src="/images/gallery/code/02.png" alt="06" class="tab3" />
+      <img src="/images/gallery/code/03.png" alt="07" class="tab3" />
+    </section>
+
+    <style>
+      h1 {
+        padding: 20px;
+        margin: 0;
+        text-align: center;
+      }
+
+      body {
+        padding: 20px;
+      }
+
+      .tabs {
+        display: flex;
+      }
+
+      .tab {
+        background-color: aqua;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+
+      .active {
+        border: 1px solid black;
+      }
+
+      section {
+        margin-top: 5px;
+        padding: 20px;
+        border: 1px solid black;
+
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        border: 1px solid black;
+      }
+    </style>
+
+    <script>
+      $(document).ready(function () {
+        // Handle tab clicks
+        $(".tab").click(function () {
+          // Remove the "active" class from all tabs
+          $(".tab").removeClass("active");
+
+          // Add the "active" class to the clicked tab
+          $(this).addClass("active");
+
+          // Get the data-tab attribute value
+          var tabId = $(this).data("tab");
+
+          // Show all images by default
+          if (tabId === "tab1") {
+            $(".content img").show();
+          } else {
+            // Hide all images
+            $(".content img").hide();
+
+            // Show only images with the corresponding class
+            $("." + tabId).show();
+          }
+        });
+
+        // Show the initial tab content (All)
+        $(".tab[data-tab='tab1']").click();
+      });
+    </script>
+  </body>
+</html>
